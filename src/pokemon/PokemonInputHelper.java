@@ -1,26 +1,32 @@
 package pokemon;
 
 import java.util.Scanner;
+import utils.TypeUtils;
+
 
 public class PokemonInputHelper {
+
+
     private final Scanner scanner;
+
 
     public PokemonInputHelper(final Scanner scanner) {
         this.scanner = scanner;
     }
 
-
     public int inputPokedexNumber(PokemonManager manager) {
         int number;
 
         while (true) {
-            System.out.print("Enter Pokedex Number (1 to 1010): ");
-            String input = scanner.nextLine();
+            System.out.printf("Enter Pokedex Number (%d to %d): ",
+                PokemonConstants.MIN_POKEDEX, PokemonConstants.MAX_POKEDEX);
+            String input = scanner.nextLine().trim();
             try {
                 int temp = Integer.parseInt(input);
-                if (temp < 1 || temp > 1010) {
-                    System.out.println("Must be in range 1–1010.");
-                } else if (manager.isPokedexNumberUnique(temp)) {
+                if (temp < PokemonConstants.MIN_LEVEL || temp > PokemonConstants.MAX_POKEDEX) {
+                    System.out.printf("Must be in range %d–%d.%n",
+                        PokemonConstants.MIN_LEVEL, PokemonConstants.MAX_POKEDEX);
+                } else if (!manager.isPokedexNumberUnique(temp)) {
                     System.out.println("Pokedex number already exists.");
                 } else {
                     number = temp;
@@ -44,12 +50,14 @@ public class PokemonInputHelper {
             if (input.isEmpty()) {
                 System.out.println("Name cannot be empty.");
             } else if (!input.matches("[A-Za-z.\\-\\s'()]+")) {
-                System.out.println("Invalid characters in name. Only letters, dashes, apostrophes, periods, parentheses, and spaces are allowed.");
+                System.out.println(
+                    "Invalid characters in name. Only letters, dashes, apostrophes, periods, parentheses, and spaces are allowed.");
             } else {
                 name = input.substring(0, 1).toUpperCase() + input.substring(1);
 
                 if (manager.isPokemonNameTaken(name)) {
-                    System.out.println("This Pokémon name already exists. If it's a regional variant, add the region in parentheses (e.g., 'Meowth (Galar)').");
+                    System.out.println(
+                        "This Pokémon name already exists. If it's a regional variant, add the region in parentheses (e.g., 'Meowth (Galar)').");
                 } else {
                     break;
                 }
@@ -60,8 +68,6 @@ public class PokemonInputHelper {
     }
 
 
-
-
     public String inputPokemonTyping(String typeName) {
         String validType = "";
         boolean isValid = false;
@@ -70,8 +76,8 @@ public class PokemonInputHelper {
             System.out.print("Enter " + typeName + " Type: ");
             String type = scanner.nextLine().trim().toLowerCase();
 
-            if (isValidType(type)) {
-                validType = capitalize(type);
+            if (TypeUtils.isValidType(type)) {
+                validType = TypeUtils.capitalize(type);
                 isValid = true;
             } else {
                 System.out.println("Invalid type. Please enter a valid Pokémon type.");
@@ -96,57 +102,7 @@ public class PokemonInputHelper {
         return result;
     }
 
-
-    private boolean isValidType(String type) {
-        String[] validTypes = {
-                "normal", "fire", "water", "electric", "grass", "ice",
-                "fighting", "poison", "ground", "flying", "psychic", "bug",
-                "rock", "ghost", "dragon", "dark", "steel", "fairy"
-        };
-
-        boolean found = false;
-        for (String validType : validTypes) {
-            if (validType.equals(type)) {
-                found = true;
-                break;
-            }
-        }
-        return found;
-    }
-
-    private String capitalize(String s) {
-        String result;
-        if (s == null || s.isEmpty()) {
-            result = s;
-        } else {
-            result = s.substring(0, 1).toUpperCase() + s.substring(1);
-        }
-        return result;
-    }
-
-    public int inputBaseLevel() {
-        int level;
-
-        while (true) {
-            System.out.print("Enter Base Level (1 to 70): ");
-            String input = scanner.nextLine().trim();
-            try {
-                int temp = Integer.parseInt(input);
-                if (temp < 1 || temp > 70) {
-                    System.out.println("Base Level must be in the range 1–70.");
-                } else {
-                    level = temp;
-                    break;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a valid integer.");
-            }
-        }
-        return level;
-    }
-
-
-    public int inputEvolvesFrom(PokemonManager manager) {
+    public int inputEvolvesFrom(int currentNumber, PokemonManager manager) {
         int number;
 
         while (true) {
@@ -156,21 +112,30 @@ public class PokemonInputHelper {
             try {
                 number = Integer.parseInt(input);
 
-                if (number == 0) {
+                // Always valid: means no evolution
+                if (number == PokemonConstants.NO_EVOLUTION) {
                     break;
-                } else if (number > 0 && manager.doesPokedexNumberExists(number)) {
-                    break;
-                } else {
-                    System.out.println("Invalid Pokédex number. Must be 0 or an existing Pokémon.");
                 }
+
+                // Must refer to an existing Pokémon and not itself
+                boolean exists = manager.doesPokedexNumberExists(number);
+                boolean notSelf = (number != currentNumber);
+                if (exists && notSelf) {
+                    break;
+                }
+
+                System.out.println(
+                    "Invalid number. Enter 0 (no evolution) or an existing Pokédex number ≠ " +
+                        currentNumber + ".");
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a valid integer.");
             }
         }
+
         return number;
     }
 
-    public int inputEvolvesTo(PokemonManager manager) {
+    public int inputEvolvesTo(int currentNumber, PokemonManager manager) {
         int number;
 
         while (true) {
@@ -180,13 +145,22 @@ public class PokemonInputHelper {
             try {
                 number = Integer.parseInt(input);
 
-                if (number == 0) {
-                    break;  // no evolution
-                } else if (number > 0 && manager.doesPokedexNumberExists(number)) {
-                    break;  // valid Pokémon number, it already exists
-                } else {
-                    System.out.println("Invalid Pokédex number. Must be 0 or an existing Pokémon.");
+                // Always valid: no further evolution
+                if (number == PokemonConstants.NO_EVOLUTION) {
+                    break;
                 }
+
+                // Must refer to an existing Pokémon and not itself
+                boolean exists = manager.doesPokedexNumberExists(number);
+                boolean notSelf = (number != currentNumber);
+                if (exists && notSelf) {
+                    break;
+                }
+
+                System.out.println(
+                    "Invalid number. Enter 0 (no further evolution) or an existing Pokédex number ≠ "
+                        +
+                        currentNumber + ".");
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a valid integer.");
             }
@@ -195,35 +169,48 @@ public class PokemonInputHelper {
         return number;
     }
 
-    public int inputEvolutionLevel(int baseLevel, PokemonManager manager) {
+    public int inputEvolutionLevel() {
         int evolutionLevel;
+
         while (true) {
-            System.out.print("Enter Evolution Level (0 if none): ");
+            // Explain why minimum is 2
+            System.out.print("Enter Evolution Level (2 to " + PokemonConstants.MAX_LEVEL +
+                " — Pokémon start at level 1 and can’t evolve immediately): ");
             String input = scanner.nextLine().trim();
             try {
                 evolutionLevel = Integer.parseInt(input);
-                if (manager.isValidEvolutionLevel(baseLevel, evolutionLevel)) {
+
+                if (evolutionLevel >= 2 && evolutionLevel <= PokemonConstants.MAX_LEVEL) {
                     break;
                 } else {
-                    System.out.println("Evolution level must be 0 or greater than base level and at most 100.");
+                    System.out.println("Evolution level must be between 2 and "
+                        + PokemonConstants.MAX_LEVEL +
+                        " (since a Pokémon can’t evolve at its base level of 1).");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter an integer.");
+                System.out.println("Invalid input. Please enter an integer between 2 and "
+                    + PokemonConstants.MAX_LEVEL + ".");
             }
         }
+
         return evolutionLevel;
     }
+
+
     public int inputBaseStat(String statName) {
-        int stat = -1;
+        int stat;
         while (true) {
-            System.out.print("Enter base " + statName + " (positive integer): ");
+            System.out.print(
+                "Enter base " + statName + " (1–" + PokemonConstants.MAX_BASE_STAT + "): ");
             String input = scanner.nextLine().trim();
             try {
                 stat = Integer.parseInt(input);
-                if (stat > 0) {
+                if (stat > 0 && stat <= PokemonConstants.MAX_BASE_STAT) {
                     break;
                 } else {
-                    System.out.println(statName + " must be a positive integer.");
+                    System.out.println(
+                        statName + " must be between 1 and " + PokemonConstants.MAX_BASE_STAT
+                            + ".");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a valid integer.");
@@ -231,5 +218,4 @@ public class PokemonInputHelper {
         }
         return stat;
     }
-
 }
