@@ -27,7 +27,7 @@ public class PokemonInputHelper {
                 if (temp < PokemonConstants.MIN_LEVEL || temp > PokemonConstants.MAX_POKEDEX) {
                     System.out.printf("Must be in range %d–%d.%n",
                         PokemonConstants.MIN_LEVEL, PokemonConstants.MAX_POKEDEX);
-                } else if (!manager.isPokedexNumberUnique(temp)) {
+                } else if (manager.isPokedexNumberUnique(temp)) {
                     System.out.println("Pokedex number already exists.");
                 } else {
                     number = temp;
