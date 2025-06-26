@@ -15,6 +15,7 @@ public class PokemonManager {
     private final PokemonInputHelper inputHelper;
     private final List<Pokemon> pokemonList;
     private final Scanner scanner;
+    private static final String MENU_OPTION_FORMAT = "%-5s %-25s%n";
 
     public PokemonManager(final Scanner scanner) {
         inputHelper = new PokemonInputHelper(scanner);
@@ -121,53 +122,25 @@ public class PokemonManager {
         if (pokemonList.isEmpty()) {
             System.out.println("\nSystem: No Pokémon in the database.");
         } else {
-            // Header
             System.out.println(centerText("Pokémon Database", 110));
             String formatHeader = "%-12s %-12s %-15s %-7s %-5s %-8s %-8s %-14s %-14s %-6s\n";
             System.out.printf(formatHeader,
-                "Pokedex #", "Name", "Type/s", "Total", "HP", "Attack",
-                "Defense", "Sp. Attack", "Sp. Defense", "Speed");
+                    "Pokedex #", "Name", "Type/s", "Total", "HP", "Attack",
+                    "Defense", "Sp. Attack", "Sp. Defense", "Speed");
             printCenteredLine(repeat("-", 110));
 
-            // Row format: Poke#, Name, Type(s), Total, HP,  Atk, Def, SpA, SpD, Spe
-            String formatRow = "%-12s %-12s %-15s %-7d %-5d %-8d %-8d %-14d %-14d %-6d\n";
-
             for (Pokemon p : pokemonList) {
-                Pokemon.PokemonStats s = p.getPokemonStats();
-
-                int total = s.getHp() +
-                    s.getAttack() +
-                    s.getDefense() +
-                    s.getSpAttack() +
-                    s.getSpDefense() +
-                    s.getSpeed();
-
-                String types = p.getPrimaryType();
-                if (p.getSecondaryType() != null && !p.getSecondaryType().isEmpty()) {
-                    types += "/" + p.getSecondaryType();
-                }
-
-                System.out.printf(formatRow,
-                    String.format("%03d", p.getPokedexNumber()),
-                    p.getName(),
-                    types,
-                    total,
-                    s.getHp(),
-                    s.getAttack(),
-                    s.getDefense(),
-                    s.getSpAttack(),
-                    s.getSpDefense(),
-                    s.getSpeed()
-                );
+                p.display(); // Now calls the method from Pokemon
             }
         }
     }
 
+
     public void handleSearch() {
         System.out.println("\n" + centerText("--- Search Pokémon ---", 35));
-        System.out.printf("%-5s %-25s%n", "1.", "By Name");
-        System.out.printf("%-5s %-25s%n", "2.", "By Type");
-        System.out.printf("%-5s %-25s%n", "3.", "By Pokedex ID");
+        System.out.printf(MENU_OPTION_FORMAT, "1.", "By Name");
+        System.out.printf(MENU_OPTION_FORMAT, "2.", "By Type");
+        System.out.printf(MENU_OPTION_FORMAT, "3.", "By Pokedex ID");
         System.out.printf("%-5s", ""); // Align the input with options
         System.out.print("Enter option: ");
 
@@ -235,6 +208,7 @@ public class PokemonManager {
 
     public void showSearchResults(List<Pokemon> results, String title) {
         int width = 110;
+
         if (results.isEmpty()) {
             System.out.println("No Pokémon found for " + title);
             return;
@@ -243,40 +217,15 @@ public class PokemonManager {
         printCenteredLine(centerText("Results for " + title, width));
         String formatHeader = "%-12s %-12s %-15s %-7s %-5s %-8s %-8s %-14s %-14s %-6s\n";
         System.out.printf(formatHeader,
-            "Pokedex #", "Name", "Type/s", "Total", "HP", "Attack",
-            "Defense", "Sp. Attack", "Sp. Defense", "Speed");
+                "Pokedex #", "Name", "Type/s", "Total", "HP", "Attack",
+                "Defense", "Sp. Attack", "Sp. Defense", "Speed");
         printCenteredLine(repeat("-", width));
 
-        String formatRow = "%-12s %-12s %-15s %-7d %-5d %-8d %-8d %-14d %-14d %-6d\n";
         for (Pokemon p : results) {
-            Pokemon.PokemonStats s = p.getPokemonStats(); // pull the nested stats object
-
-            int total = s.getHp() +
-                s.getAttack() +
-                s.getDefense() +
-                s.getSpAttack() +
-                s.getSpDefense() +
-                s.getSpeed();
-
-            String types = p.getPrimaryType();
-            if (p.getSecondaryType() != null && !p.getSecondaryType().isEmpty()) {
-                types += "/" + p.getSecondaryType();
-            }
-
-            System.out.printf(formatRow,
-                String.format("%03d", p.getPokedexNumber()),
-                p.getName(),
-                types,
-                total,
-                s.getHp(),
-                s.getAttack(),
-                s.getDefense(),
-                s.getSpAttack(),
-                s.getSpDefense(),
-                s.getSpeed()
-            );
+            p.display();
         }
     }
+
 
     public void loadTest() {
         System.out.println("Loading test Pokémon data...");
