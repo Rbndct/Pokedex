@@ -44,7 +44,7 @@ public class ItemManager {
                 "+10 Special Defense EVs",
                 10000, 5000, 10));
 
-// Feathers (slightly increase EVs)
+        // Feathers (slightly increase EVs)
         itemList.add(
             new Item("Health Feather", "Feather", "Slightly increases HP.", "+1 HP EV", 300, 150,
                 10));
@@ -64,7 +64,7 @@ public class ItemManager {
         itemList.add(new Item("Clever Feather", "Feather", "Slightly increases Special Defense.",
             "+1 Special Defense EV", 300, 150, 10));
 
-// Other
+        // Other
         itemList.add(new Item("Rare Candy", "Leveling Item", "A candy packed with energy.",
             "Increases level by 1", -1, 2400, 10));
 
@@ -150,7 +150,6 @@ public class ItemManager {
         }
     }
 
-
     public void searchItemsByNameOrEffect(String keyword) {
         List<Item> results = new ArrayList<>();
         String lowerKeyword = keyword.toLowerCase();
@@ -175,7 +174,6 @@ public class ItemManager {
         }
         showItemSearchResults(results, "Category: " + category);
     }
-
 
     private void showItemSearchResults(List<Item> results, String title) {
         if (results.isEmpty()) {
