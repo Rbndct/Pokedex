@@ -3,15 +3,30 @@ package move;
 import java.util.Scanner;
 import utils.TypeUtils;
 
+/**
+ * The type Move input helper.
+ */
 @SuppressWarnings("squid:S106")
 public class MoveInputHelper {
 
     private final Scanner scanner;
 
+    /**
+     * Instantiates a new Move input helper.
+     *
+     * @param scanner the scanner
+     */
     public MoveInputHelper(final Scanner scanner) {
         this.scanner = scanner;
     }
 
+    /**
+     * Input move name string.
+     *
+     * @param manager the manager
+     *
+     * @return the string
+     */
     public String inputMoveName(MoveManager manager) {
         String name;
 
@@ -41,6 +56,11 @@ public class MoveInputHelper {
         return name;
     }
 
+    /**
+     * Input move description string.
+     *
+     * @return the string
+     */
     public String inputMoveDescription() {
         String description;
 
@@ -65,6 +85,11 @@ public class MoveInputHelper {
         return description;
     }
 
+    /**
+     * Input move classification move . classification.
+     *
+     * @return the move . classification
+     */
     public Move.Classification inputMoveClassification() {
         while (true) {
             System.out.print("Enter move classification (HM or TM): ");
@@ -78,6 +103,13 @@ public class MoveInputHelper {
         }
     }
 
+    /**
+     * Input move typing string.
+     *
+     * @param typeName the type name
+     *
+     * @return the string
+     */
     public String inputMoveTyping(String typeName) {
         String validType = "";
         boolean isValid = false;
@@ -96,6 +128,13 @@ public class MoveInputHelper {
         return validType;
     }
 
+    /**
+     * Input secondary move type string.
+     *
+     * @param typeName the type name
+     *
+     * @return the string
+     */
     public String inputSecondaryMoveType(String typeName) {
         String result;
         System.out.print("Does this move have a Secondary Type? (0 = No, 1 = Yes): ");
