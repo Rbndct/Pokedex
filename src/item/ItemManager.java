@@ -8,17 +8,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The type Item manager.
+ */
+@SuppressWarnings("squid:S106")
 public class ItemManager {
 
     private final Scanner scanner;
     private final List<Item> itemList;
 
+    /**
+     * Instantiates a new Item manager.
+     *
+     * @param scanner the scanner
+     */
     public ItemManager(final Scanner scanner) {
         itemList = new ArrayList<>();
         populateInitialItems();
         this.scanner = scanner;
     }
 
+    /**
+     * Populate initial items.
+     */
     public void populateInitialItems() {
         // Vitamins (boost EVs)
         itemList.add(
@@ -101,27 +113,29 @@ public class ItemManager {
 
     }
 
+    /**
+     * View all items available.
+     */
     public void viewAllItemsAvailable() {
         if (itemList.isEmpty()) {
             System.out.println("\nSystem: No items in the database.");
         } else {
             // Header
             System.out.println(centerText("Item Database", 80));
-            String formatHeader = "%-20s %-20s %-45s\n";
+            String formatHeader = "%-25s %-20s %-35s\n";
             System.out.printf(formatHeader, "Item Name", "Category", "Effect");
             printCenteredLine(repeat("-", 80));
 
-            // Row format
-            String formatRow = "%-20s %-20s %-45s\n";
             for (Item item : itemList) {
-                System.out.printf(formatRow,
-                    item.getName(),
-                    item.getCategory(),
-                    item.getEffect());
+                item.display();
             }
         }
     }
 
+
+    /**
+     * Handle item search.
+     */
     public void handleItemSearch() {
         System.out.println("\n" + centerText("--- Search Pokémon Items ---", 35));
         System.out.printf("%-5s %-30s%n", "1.", "By Name or Effect");
@@ -150,6 +164,11 @@ public class ItemManager {
         }
     }
 
+    /**
+     * Search items by name or effect.
+     *
+     * @param keyword the keyword
+     */
     public void searchItemsByNameOrEffect(String keyword) {
         List<Item> results = new ArrayList<>();
         String lowerKeyword = keyword.toLowerCase();
@@ -165,6 +184,11 @@ public class ItemManager {
         showItemSearchResults(results, "Name/Effect contains: " + keyword);
     }
 
+    /**
+     * Search by category.
+     *
+     * @param category the category
+     */
     public void searchByCategory(String category) {
         List<Item> results = new ArrayList<>();
         for (Item item : itemList) {
@@ -175,6 +199,12 @@ public class ItemManager {
         showItemSearchResults(results, "Category: " + category);
     }
 
+    /**
+     * Show item search results.
+     *
+     * @param results the results
+     * @param title   the title
+     */
     private void showItemSearchResults(List<Item> results, String title) {
         if (results.isEmpty()) {
             System.out.println("No items found for " + title);
@@ -186,13 +216,8 @@ public class ItemManager {
         System.out.printf(formatHeader, "Item Name", "Category", "Effect");
         printCenteredLine(repeat("-", 80));
 
-        String formatRow = "%-25s %-20s %-35s\n";
         for (Item item : results) {
-            System.out.printf(formatRow,
-                item.getName(),
-                item.getCategory(),
-                item.getEffect());
+            item.display();
         }
     }
-
 }
