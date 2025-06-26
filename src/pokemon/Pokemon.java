@@ -75,67 +75,67 @@ public class Pokemon {
         this.heldItem = heldItem;
     }
 
-//    public void displayDetails() {
-//
-//        printHeader();
-//        printGeneralInfo();
-//        printEvolutionInfo();
-//        printBaseStats();
-//        printMoveSet();
-//    }
-//
-//    private void printHeader() {
-//        printCenteredLine(repeat("-", 80));
-//        printCenteredLine(centerText(this.name.toUpperCase(), 80));
-//        printCenteredLine(repeat("-", 80));
-//    }
-//
-//    private void printGeneralInfo() {
-//        String[][] generalInfo = {
-//            {"Pokedex No", String.valueOf(pokedexNumber), "Name", name},
-//            {"Primary Type", primaryType, "Secondary Type",
-//                (secondaryType == null || secondaryType.isEmpty()) ? "None" : secondaryType},
-//            {"Base Level", String.valueOf(baseLevel), "Held Item",
-//                (heldItem == null || heldItem.isEmpty()) ? "None" : heldItem}
-//        };
-//        printSection("GENERAL INFO", generalInfo, 80);
-//    }
-//
-//    private void printEvolutionInfo() {
-//        String[][] evolutionInfo = {
-//            {"Evolves From", String.valueOf(evolvesFromNumber), "Evolves To",
-//                String.valueOf(evolvesToNumber)},
-//            {"Evolution Level", String.valueOf(evolutionLevel), "", ""}
-//        };
-//        printSection("EVOLUTION INFO", evolutionInfo, 80);
-//    }
-//
-//    private void printBaseStats() {
-//        String[][] baseStats = {
-//            {"HP", String.valueOf(baseHp), "Attack", String.valueOf(baseAttack)},
-//            {"Defense", String.valueOf(baseDefense), "Speed", String.valueOf(baseSpeed)}
-//        };
-//        printSection("BASE STATS", baseStats, 80);
-//    }
-//
-//    private void printMoveSet() {
-//        String[][] moveSetFormatted = {
-//            {"Move 1", getMoveOrNone(0), "Move 2", getMoveOrNone(1)},
-//            {"Move 3", getMoveOrNone(2), "Move 4", getMoveOrNone(3)}
-//        };
-//        printSection("MOVE SET", moveSetFormatted, 80);
-//    }
-//
-//    private String getMoveOrNone(int index) {
-//        String result = "None";
-//        if (index >= 0 && index < moveSet.size()) {
-//            String move = moveSet.get(index);
-//            if (move != null && !move.isEmpty()) {
-//                result = move;
-//            }
-//        }
-//        return result;
-//    }
+    //    public void displayDetails() {
+    //
+    //        printHeader();
+    //        printGeneralInfo();
+    //        printEvolutionInfo();
+    //        printBaseStats();
+    //        printMoveSet();
+    //    }
+    //
+    //    private void printHeader() {
+    //        printCenteredLine(repeat("-", 80));
+    //        printCenteredLine(centerText(this.name.toUpperCase(), 80));
+    //        printCenteredLine(repeat("-", 80));
+    //    }
+    //
+    //    private void printGeneralInfo() {
+    //        String[][] generalInfo = {
+    //            {"Pokedex No", String.valueOf(pokedexNumber), "Name", name},
+    //            {"Primary Type", primaryType, "Secondary Type",
+    //                (secondaryType == null || secondaryType.isEmpty()) ? "None" : secondaryType},
+    //            {"Base Level", String.valueOf(baseLevel), "Held Item",
+    //                (heldItem == null || heldItem.isEmpty()) ? "None" : heldItem}
+    //        };
+    //        printSection("GENERAL INFO", generalInfo, 80);
+    //    }
+    //
+    //    private void printEvolutionInfo() {
+    //        String[][] evolutionInfo = {
+    //            {"Evolves From", String.valueOf(evolvesFromNumber), "Evolves To",
+    //                String.valueOf(evolvesToNumber)},
+    //            {"Evolution Level", String.valueOf(evolutionLevel), "", ""}
+    //        };
+    //        printSection("EVOLUTION INFO", evolutionInfo, 80);
+    //    }
+    //
+    //    private void printBaseStats() {
+    //        String[][] baseStats = {
+    //            {"HP", String.valueOf(baseHp), "Attack", String.valueOf(baseAttack)},
+    //            {"Defense", String.valueOf(baseDefense), "Speed", String.valueOf(baseSpeed)}
+    //        };
+    //        printSection("BASE STATS", baseStats, 80);
+    //    }
+    //
+    //    private void printMoveSet() {
+    //        String[][] moveSetFormatted = {
+    //            {"Move 1", getMoveOrNone(0), "Move 2", getMoveOrNone(1)},
+    //            {"Move 3", getMoveOrNone(2), "Move 4", getMoveOrNone(3)}
+    //        };
+    //        printSection("MOVE SET", moveSetFormatted, 80);
+    //    }
+    //
+    //    private String getMoveOrNone(int index) {
+    //        String result = "None";
+    //        if (index >= 0 && index < moveSet.size()) {
+    //            String move = moveSet.get(index);
+    //            if (move != null && !move.isEmpty()) {
+    //                result = move;
+    //            }
+    //        }
+    //        return result;
+    //    }
 
     private void addDefaultMoves() {
         moveSet.add("Tackle");

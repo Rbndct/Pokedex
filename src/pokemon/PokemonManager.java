@@ -9,14 +9,12 @@ import java.util.List;
 import java.util.Scanner;
 import pokemon.Pokemon.PokemonEvolutionInfo;
 
-
+@SuppressWarnings("squid:S106")
 public class PokemonManager {
 
-    public static final int POKEMON_MAX_LEVEL = 100;
     private final PokemonInputHelper inputHelper;
     private final List<Pokemon> pokemonList;
     private final Scanner scanner;
-
 
     public PokemonManager(final Scanner scanner) {
         inputHelper = new PokemonInputHelper(scanner);
@@ -71,7 +69,7 @@ public class PokemonManager {
             secondaryType,
             stats,
             evoInfo,
-            ""  // heldItem
+            "" // heldItem
         );
 
         pokemonList.add(newPokemon);
@@ -79,7 +77,6 @@ public class PokemonManager {
             newPokemon.getName(),
             newPokemon.getPokedexNumber());
     }
-
 
     public boolean isPokedexNumberUnique(int inputNumber) {
         boolean isTaken = false;
@@ -104,12 +101,11 @@ public class PokemonManager {
         return taken;
     }
 
-
     public boolean doesPokedexNumberExists(int pokedexNumber) {
         boolean exists = false;
 
         if (pokedexNumber == 0) {
-            exists = true;  // 0 means no evolution, valid by default
+            exists = true; // 0 means no evolution, valid by default
         } else {
             for (Pokemon p : pokemonList) {
                 if (p.getPokedexNumber() == pokedexNumber) {
@@ -139,12 +135,12 @@ public class PokemonManager {
             for (Pokemon p : pokemonList) {
                 Pokemon.PokemonStats s = p.getPokemonStats();
 
-                int total = s.getHp()
-                    + s.getAttack()
-                    + s.getDefense()
-                    + s.getSpAttack()
-                    + s.getSpDefense()
-                    + s.getSpeed();
+                int total = s.getHp() +
+                    s.getAttack() +
+                    s.getDefense() +
+                    s.getSpAttack() +
+                    s.getSpDefense() +
+                    s.getSpeed();
 
                 String types = p.getPrimaryType();
                 if (p.getSecondaryType() != null && !p.getSecondaryType().isEmpty()) {
@@ -166,7 +162,6 @@ public class PokemonManager {
             }
         }
     }
-
 
     public void handleSearch() {
         System.out.println("\n" + centerText("--- Search Pokémon ---", 35));
@@ -238,7 +233,6 @@ public class PokemonManager {
         showSearchResults(results, "Pokedex ID: " + String.format("%03d", id));
     }
 
-
     public void showSearchResults(List<Pokemon> results, String title) {
         int width = 110;
         if (results.isEmpty()) {
@@ -255,14 +249,14 @@ public class PokemonManager {
 
         String formatRow = "%-12s %-12s %-15s %-7d %-5d %-8d %-8d %-14d %-14d %-6d\n";
         for (Pokemon p : results) {
-            Pokemon.PokemonStats s = p.getPokemonStats();  // pull the nested stats object
+            Pokemon.PokemonStats s = p.getPokemonStats(); // pull the nested stats object
 
-            int total = s.getHp()
-                + s.getAttack()
-                + s.getDefense()
-                + s.getSpAttack()
-                + s.getSpDefense()
-                + s.getSpeed();
+            int total = s.getHp() +
+                s.getAttack() +
+                s.getDefense() +
+                s.getSpAttack() +
+                s.getSpDefense() +
+                s.getSpeed();
 
             String types = p.getPrimaryType();
             if (p.getSecondaryType() != null && !p.getSecondaryType().isEmpty()) {
@@ -283,7 +277,6 @@ public class PokemonManager {
             );
         }
     }
-
 
     public void loadTest() {
         System.out.println("Loading test Pokémon data...");

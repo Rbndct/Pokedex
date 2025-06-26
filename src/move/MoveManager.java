@@ -1,6 +1,5 @@
 package move;
 
-
 import static utils.DisplayHelper.centerText;
 import static utils.DisplayHelper.printCenteredLine;
 import static utils.DisplayHelper.repeat;
@@ -10,11 +9,14 @@ import java.util.List;
 import java.util.Scanner;
 import utils.DisplayHelper;
 
+@SuppressWarnings("squid:S106")
 public class MoveManager {
 
+    private static final String MENU_FORMAT = "%-5s %-25s%n";
     private final List<Move> moveList;
     private final MoveInputHelper inputHelper;
     private final Scanner scanner;
+
 
     public MoveManager(final Scanner scanner) {
         inputHelper = new MoveInputHelper(scanner);
@@ -46,7 +48,6 @@ public class MoveManager {
         System.out.println("Move added: " + newMove.getName() +
             " (" + newMove.getClassification() + ")");
     }
-
 
     public boolean isMoveNameTaken(String name) {
         boolean taken = false;
@@ -94,12 +95,11 @@ public class MoveManager {
         }
     }
 
-
     public void handleMoveSearch() {
         System.out.println("\n" + centerText("--- Search Pokémon Moves ---", 35));
-        System.out.printf("%-5s %-25s%n", "1.", "By Name or Effect");
-        System.out.printf("%-5s %-25s%n", "2.", "By Type");
-        System.out.printf("%-5s %-25s%n", "3.", "By Classification (HM/TM)");
+        System.out.printf(MENU_FORMAT, "1.", "By Name or Effect");
+        System.out.printf(MENU_FORMAT, "2.", "By Type");
+        System.out.printf(MENU_FORMAT, "3.", "By Classification (HM/TM)");
         System.out.printf("%-5s", ""); // Align the input with options
         System.out.print("Enter option: ");
 
@@ -207,5 +207,3 @@ public class MoveManager {
         moveList.add(defend);
     }
 }
-
-

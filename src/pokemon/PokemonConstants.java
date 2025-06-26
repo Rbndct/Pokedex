@@ -13,7 +13,6 @@ public final class PokemonConstants {
     public static final int DEFAULT_BASE_LEVEL = 1;
     public static final int MAX_BASE_STAT = 255; // Max base stat used in Pokémon games
 
-
     private PokemonConstants() {
-    }  // prevent instantiation
+    }
 }

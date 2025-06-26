@@ -3,6 +3,7 @@ package move;
 import java.util.Scanner;
 import utils.TypeUtils;
 
+@SuppressWarnings("squid:S106")
 public class MoveInputHelper {
 
     private final Scanner scanner;
@@ -40,7 +41,6 @@ public class MoveInputHelper {
         return name;
     }
 
-
     public String inputMoveDescription() {
         String description;
 
@@ -65,7 +65,6 @@ public class MoveInputHelper {
         return description;
     }
 
-
     public Move.Classification inputMoveClassification() {
         while (true) {
             System.out.print("Enter move classification (HM or TM): ");
@@ -78,7 +77,6 @@ public class MoveInputHelper {
             }
         }
     }
-
 
     public String inputMoveTyping(String typeName) {
         String validType = "";
@@ -106,7 +104,7 @@ public class MoveInputHelper {
         if (input.equals("1")) {
             result = inputMoveTyping(typeName);
         } else if (input.equals("0")) {
-            result = "";  // No secondary type
+            result = ""; // No secondary type
         } else {
             System.out.println("Invalid input. Assuming no secondary type.");
             result = "";
