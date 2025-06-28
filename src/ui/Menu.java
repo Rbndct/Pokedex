@@ -7,6 +7,9 @@ import java.util.Scanner;
 import move.MoveManager;
 import pokemon.PokemonManager;
 
+/**
+ * The type Menu.
+ */
 public class Menu {
 
     private final PokemonManager pokemonManager;
@@ -14,6 +17,14 @@ public class Menu {
     private final ItemManager itemManager;
     private final Scanner scanner;
 
+    /**
+     * Instantiates a new Menu.
+     *
+     * @param pokemonManager the pokemon manager
+     * @param moveManager    the move manager
+     * @param itemManager    the item manager
+     * @param scanner        the scanner
+     */
     public Menu(PokemonManager pokemonManager, MoveManager moveManager, ItemManager itemManager,
         Scanner scanner) {
         this.pokemonManager = pokemonManager;
@@ -22,6 +33,9 @@ public class Menu {
         this.scanner = scanner;
     }
 
+    /**
+     * Display.
+     */
     public void display() {
         int choice = -1;
         while (choice != 9) {

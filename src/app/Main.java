@@ -6,8 +6,16 @@ import move.MoveManager;
 import pokemon.PokemonManager;
 import ui.Menu;
 
+/**
+ * The type Main.
+ */
 public class Main {
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         PokemonManager pokemonManager = new PokemonManager(scanner);

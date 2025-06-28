@@ -3,6 +3,9 @@ package pokemon;
 import java.util.Scanner;
 import utils.TypeUtils;
 
+/**
+ * The type Pokemon input helper.
+ */
 @SuppressWarnings("squid:S106")
 public class PokemonInputHelper {
 
@@ -10,11 +13,23 @@ public class PokemonInputHelper {
     private final Scanner scanner;
 
 
+    /**
+     * Instantiates a new Pokemon input helper.
+     *
+     * @param scanner the scanner
+     */
     public PokemonInputHelper(final Scanner scanner) {
         this.scanner = scanner;
     }
 
 
+    /**
+     * Input pokedex number int.
+     *
+     * @param manager the manager
+     *
+     * @return the int
+     */
     public int inputPokedexNumber(PokemonManager manager) {
         int number;
 
@@ -40,6 +55,13 @@ public class PokemonInputHelper {
         return number;
     }
 
+    /**
+     * Input pokemon name string.
+     *
+     * @param manager the manager
+     *
+     * @return the string
+     */
     public String inputPokemonName(PokemonManager manager) {
         String name;
 
@@ -67,6 +89,13 @@ public class PokemonInputHelper {
         return name;
     }
 
+    /**
+     * Input pokemon typing string.
+     *
+     * @param typeName the type name
+     *
+     * @return the string
+     */
     public String inputPokemonTyping(String typeName) {
         String validType = "";
         boolean isValid = false;
@@ -85,6 +114,13 @@ public class PokemonInputHelper {
         return validType;
     }
 
+    /**
+     * Input secondary type string.
+     *
+     * @param typeName the type name
+     *
+     * @return the string
+     */
     public String inputSecondaryType(String typeName) {
         String result;
         System.out.print("Does this Pokémon have a Secondary Type? (0 = No, 1 = Yes): ");
@@ -101,6 +137,14 @@ public class PokemonInputHelper {
         return result;
     }
 
+    /**
+     * Input evolves from int.
+     *
+     * @param currentNumber the current number
+     * @param manager       the manager
+     *
+     * @return the int
+     */
     public int inputEvolvesFrom(int currentNumber, PokemonManager manager) {
         int number = -1;
         boolean valid = false;
@@ -130,6 +174,14 @@ public class PokemonInputHelper {
         return number;
     }
 
+    /**
+     * Input evolves to int.
+     *
+     * @param currentNumber the current number
+     * @param manager       the manager
+     *
+     * @return the int
+     */
     public int inputEvolvesTo(int currentNumber, PokemonManager manager) {
         int number = -1;
 
@@ -159,6 +211,11 @@ public class PokemonInputHelper {
     }
 
 
+    /**
+     * Input evolution level int.
+     *
+     * @return the int
+     */
     public int inputEvolutionLevel() {
         int evolutionLevel;
 
@@ -186,6 +243,13 @@ public class PokemonInputHelper {
         return evolutionLevel;
     }
 
+    /**
+     * Input base stat int.
+     *
+     * @param statName the stat name
+     *
+     * @return the int
+     */
     public int inputBaseStat(String statName) {
         int stat;
         while (true) {

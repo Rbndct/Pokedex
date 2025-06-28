@@ -1,5 +1,8 @@
 package utils;
 
+/**
+ * The type Type utils.
+ */
 public class TypeUtils {
 
     private static final String[] VALID_TYPES = {
@@ -13,6 +16,13 @@ public class TypeUtils {
         throw new UnsupportedOperationException("Utility class");
     }
 
+    /**
+     * Is valid type boolean.
+     *
+     * @param type the type
+     *
+     * @return the boolean
+     */
     public static boolean isValidType(String type) {
         boolean found = false;
         for (String validType : VALID_TYPES) {
@@ -24,6 +34,13 @@ public class TypeUtils {
         return found;
     }
 
+    /**
+     * Capitalize string.
+     *
+     * @param s the s
+     *
+     * @return the string
+     */
     public static String capitalize(String s) {
         if (s == null || s.isEmpty()) {
             return s;

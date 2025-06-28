@@ -3,12 +3,22 @@ package utils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Display helper.
+ */
 public class DisplayHelper {
 
     private DisplayHelper() {
         throw new UnsupportedOperationException("Utility class");
     }
 
+    /**
+     * Print section.
+     *
+     * @param title the title
+     * @param rows  the rows
+     * @param width the width
+     */
     public static void printSection(String title, String[][] rows, int width) {
         printCenteredLine(centerText(title, width));
 
@@ -31,6 +41,14 @@ public class DisplayHelper {
         printCenteredLine(repeat("-", width));
     }
 
+    /**
+     * Center text string.
+     *
+     * @param text  the text
+     * @param width the width
+     *
+     * @return the string
+     */
     public static String centerText(String text, int width) {
         if (text == null) {
             text = "";
@@ -40,14 +58,34 @@ public class DisplayHelper {
         return pad + text + pad + (text.length() % 2 == 0 ? "" : " ");
     }
 
+    /**
+     * Print centered line.
+     *
+     * @param line the line
+     */
     public static void printCenteredLine(String line) {
         System.out.println(line);
     }
 
+    /**
+     * Repeat string.
+     *
+     * @param s     the s
+     * @param count the count
+     *
+     * @return the string
+     */
     public static String repeat(String s, int count) {
         return s.repeat(count);
     }
 
+    /**
+     * Format price string.
+     *
+     * @param price the price
+     *
+     * @return the string
+     */
     public static String formatPrice(int price) {
         String formatted;
         if (price <= 0) {
@@ -58,6 +96,14 @@ public class DisplayHelper {
         return formatted;
     }
 
+    /**
+     * Wrap text list.
+     *
+     * @param text          the text
+     * @param maxLineLength the max line length
+     *
+     * @return the list
+     */
     public static List<String> wrapText(String text, int maxLineLength) {
         List<String> lines = new ArrayList<>();
         int index = 0;

@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Scanner;
 import pokemon.Pokemon.PokemonEvolutionInfo;
 
+/**
+ * The type Pokemon manager.
+ */
 @SuppressWarnings("squid:S106")
 public class PokemonManager {
 
@@ -17,6 +20,11 @@ public class PokemonManager {
     private final Scanner scanner;
     private static final String MENU_OPTION_FORMAT = "%-5s %-25s%n";
 
+    /**
+     * Instantiates a new Pokemon manager.
+     *
+     * @param scanner the scanner
+     */
     public PokemonManager(final Scanner scanner) {
         inputHelper = new PokemonInputHelper(scanner);
         pokemonList = new ArrayList<>();
@@ -25,6 +33,9 @@ public class PokemonManager {
         loadTest();
     }
 
+    /**
+     * Add pokemon.
+     */
     public void addPokemon() {
         int pokedexNumber = inputHelper.inputPokedexNumber(this);
         String pokemonName = inputHelper.inputPokemonName(this);
@@ -79,6 +90,13 @@ public class PokemonManager {
             newPokemon.getPokedexNumber());
     }
 
+    /**
+     * Is pokedex number unique boolean.
+     *
+     * @param inputNumber the input number
+     *
+     * @return the boolean
+     */
     public boolean isPokedexNumberUnique(int inputNumber) {
         boolean isTaken = false;
 
@@ -91,6 +109,13 @@ public class PokemonManager {
         return isTaken;
     }
 
+    /**
+     * Is pokemon name taken boolean.
+     *
+     * @param name the name
+     *
+     * @return the boolean
+     */
     public boolean isPokemonNameTaken(String name) {
         boolean taken = false;
         for (Pokemon p : pokemonList) {
@@ -102,6 +127,13 @@ public class PokemonManager {
         return taken;
     }
 
+    /**
+     * Does pokedex number exists boolean.
+     *
+     * @param pokedexNumber the pokedex number
+     *
+     * @return the boolean
+     */
     public boolean doesPokedexNumberExists(int pokedexNumber) {
         boolean exists = false;
 
@@ -118,6 +150,9 @@ public class PokemonManager {
         return exists;
     }
 
+    /**
+     * View all pokemon available.
+     */
     public void viewAllPokemonAvailable() {
         if (pokemonList.isEmpty()) {
             System.out.println("\nSystem: No Pokémon in the database.");
@@ -136,6 +171,9 @@ public class PokemonManager {
     }
 
 
+    /**
+     * Handle search.
+     */
     public void handleSearch() {
         System.out.println("\n" + centerText("--- Search Pokémon ---", 35));
         System.out.printf(MENU_OPTION_FORMAT, "1.", "By Name");
@@ -172,6 +210,11 @@ public class PokemonManager {
         }
     }
 
+    /**
+     * Search by name.
+     *
+     * @param name the name
+     */
     public void searchByName(String name) {
         List<Pokemon> results = new ArrayList<>();
         for (Pokemon p : pokemonList) {
@@ -182,6 +225,11 @@ public class PokemonManager {
         showSearchResults(results, "Name: " + name);
     }
 
+    /**
+     * Search by type.
+     *
+     * @param type the type
+     */
     public void searchByType(String type) {
         List<Pokemon> results = new ArrayList<>();
         for (Pokemon p : pokemonList) {
@@ -195,6 +243,11 @@ public class PokemonManager {
         showSearchResults(results, "Type: " + type);
     }
 
+    /**
+     * Search by pokedex id.
+     *
+     * @param id the id
+     */
     public void searchByPokedexId(int id) {
         List<Pokemon> results = new ArrayList<>();
         for (Pokemon p : pokemonList) {
@@ -206,6 +259,12 @@ public class PokemonManager {
         showSearchResults(results, "Pokedex ID: " + String.format("%03d", id));
     }
 
+    /**
+     * Show search results.
+     *
+     * @param results the results
+     * @param title   the title
+     */
     public void showSearchResults(List<Pokemon> results, String title) {
         int width = 110;
 
@@ -227,6 +286,9 @@ public class PokemonManager {
     }
 
 
+    /**
+     * Load test.
+     */
     public void loadTest() {
         System.out.println("Loading test Pokémon data...");
 
